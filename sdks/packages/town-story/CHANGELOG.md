@@ -1,5 +1,11 @@
 # @mirrorworld/sui.townstory
 
+## 4.0.3
+
+### Patch Changes
+
+- remove url methods
+
 ## 4.0.2
 
 ### Patch Changes
