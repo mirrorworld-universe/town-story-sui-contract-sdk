@@ -34,10 +34,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@mirrorworld/sui.townstory@4.0.2":
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/@mirrorworld/sui.townstory/-/sui.townstory-4.0.2.tgz#72e37fc316a6d475b4d486b686a1f9e59fa2f2e3"
-  integrity sha512-zic+njN1fFvvAUGQId2qc9Hv34dCVI7RU2VQM2Zuxc4w1CAejvfPB/W/jCnr2Nt2d5gVfzsqn4s8m80cOZzL8A==
+"@mirrorworld/sui.townstory@4.0.3":
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@mirrorworld/sui.townstory/-/sui.townstory-4.0.3.tgz#35070714e617f51b718a33b35a3b35ef3f5610b0"
+  integrity sha512-9T6tU2djZOJjJc8Fvg+qBgA45UiMY9OQBTroPYqoBpKEP3vJuLcQ52+rSFlqRlCw93YuhS5H9Pj3oIPwJOqJXw==
   dependencies:
     "@mysten/sui.js" "0.34.1"
     keccak256 "1.0.6"

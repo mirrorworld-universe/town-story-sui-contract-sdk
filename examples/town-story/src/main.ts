@@ -73,10 +73,6 @@ const townStoryLib: TownStoryLib = new TownStoryLib(PublishAtAddress, PackageAdd
 
     // await updateReceiverTx(OwnerSigner, FeePayerSigner, VersionConfigAddress, AdminCapAddress, MintConfigAddress, "0xecf8ddeb9eb3a97837455358fb54da82a3648b794f6ace43a524956cb69d909b");
 
-    // await updateImageUrlTx(OwnerSigner, FeePayerSigner, VersionConfigAddress, AdminCapAddress, MintConfigAddress, "https://suiexplorer.com/object/image/", ".png");
-
-    // await updateMetadataUrlTx(OwnerSigner, FeePayerSigner, VersionConfigAddress, AdminCapAddress, MintConfigAddress, "https://suiexplorer.com/object/metadata/", ".json");
-
 
 
     // Wihetlist Method
@@ -88,8 +84,8 @@ const townStoryLib: TownStoryLib = new TownStoryLib(PublishAtAddress, PackageAdd
 
     // Mint Methods
 
-    await wihetlistMintTx(SellerSigner, FeePayerSigner, VersionConfigAddress, MintConfigAddress, ThiefIndexConfigAddress, UserConfigAddress, MintCapAddress,
-        "0x522dc8c46d42c35da275b2f3f0690312286bdb2f51445be9f4831a40c8d78b91");
+    // await wihetlistMintTx(SellerSigner, FeePayerSigner, VersionConfigAddress, MintConfigAddress, ThiefIndexConfigAddress, UserConfigAddress, MintCapAddress,
+    //     "0x522dc8c46d42c35da275b2f3f0690312286bdb2f51445be9f4831a40c8d78b91");
 
     // await mintTx(BuyerSigner, FeePayerSigner, VersionConfigAddress, MintConfigAddress, ThiefIndexConfigAddress, UserConfigAddress, MintCapAddress,
     //     "0x5d15fedde05d5f71931d0a1326d5580d81fb77b1f9555cf182beaa99aaeb5cd4");
@@ -238,37 +234,6 @@ async function updateEnableMaximumMintAllowTx(senderSigner: RawSigner, feeSigner
 
     console.log(result);
 }
-
-async function updateImageUrlTx(senderSigner: RawSigner, feeSigner: RawSigner, versionConfig: string,
-                                adminCap, mintConfig: string, base: string, suffix: string) {
-    const txb: TransactionBlock = await townStoryLib.updateImageUrlTransaction((await senderSigner.getAddress()),
-        versionConfig, adminCap, mintConfig, base, suffix, (await feeSigner.getAddress()));
-
-    const senderSig = await townStoryLib.signTransaction(txb, senderSigner);
-
-    const feeSig = await townStoryLib.signTransaction(txb, feeSigner);
-
-    const result = await townStoryLib.executeTransactionBlock(txb, [senderSig, feeSig]);
-
-    console.log(result);
-}
-
-async function updateMetadataUrlTx(senderSigner: RawSigner, feeSigner: RawSigner, versionConfig: string,
-                                   adminCap, mintConfig: string, base: string, suffix: string) {
-    const txb: TransactionBlock = await townStoryLib.updateMetadataUrlTransaction((await senderSigner.getAddress()),
-        versionConfig, adminCap, mintConfig, base, suffix, (await feeSigner.getAddress()));
-
-    const senderSig = await townStoryLib.signTransaction(txb, senderSigner);
-
-    const feeSig = await townStoryLib.signTransaction(txb, feeSigner);
-
-    const result = await townStoryLib.executeTransactionBlock(txb, [senderSig, feeSig]);
-
-    console.log(result);
-}
-
-
-////////
 
 async function addedAddressInWihtelistTx(senderSigner: RawSigner, feeSigner: RawSigner, versionConfig: string,
                                          adminCap: string, userConfig: string, addresses: string[]) {
