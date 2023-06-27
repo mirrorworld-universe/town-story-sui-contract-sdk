@@ -1,6 +1,6 @@
 {
   "name": "@mirrorworld/sui.townstory",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "market SDK",
   "keywords": [],
   "author": "Bilal Afzal <bilal@mirrorworld.fun>",
@@ -26,5 +26,8 @@
   },
   "scripts": {
     "clean": "rimraf dist"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
