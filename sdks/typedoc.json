@@ -1,0 +1,6 @@
+{
+  "entryPoints": [
+    "packages/town-story/src/index.ts"
+  ],
+  "out": "docs"
+}
