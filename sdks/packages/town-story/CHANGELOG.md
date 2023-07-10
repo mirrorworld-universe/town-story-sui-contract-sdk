@@ -1,5 +1,11 @@
 # @mirrorworld/sui.townstory
 
+## 4.0.5
+
+### Patch Changes
+
+- update indexes type
+
 ## 4.0.4
 
 ### Patch Changes

@@ -93,6 +93,13 @@ const townStoryLib: TownStoryLib = new TownStoryLib(PublishAtAddress, PackageAdd
     // await adminMintTx(OwnerSigner, FeePayerSigner, VersionConfigAddress, MintConfigAddress, ThiefIndexConfigAddress, UserConfigAddress, MintCapAddress,
     //     AdminCapAddress, RoyaltyKeypair.getPublicKey().toSuiAddress());
 
+    // Metadata
+
+    // const imageUrlBase: string = "https://suiexplorer.com/image";
+    // const metadataUrlBase: string = "https://suiexplorer.com/image";
+    //
+    // const indexStart
+
 })();
 
 async function requestSuiFromFaucet(address: string) {
@@ -305,6 +312,38 @@ async function mintTx(senderSigner: RawSigner, feeSigner: RawSigner, versionConf
                       wallet: string) {
     const txb: TransactionBlock = await townStoryLib.mintTransaction((await senderSigner.getAddress()),
         versionConfig, mintConfig, thiefIndexConfig, userConfig, mintCap, wallet,
+        (await feeSigner.getAddress()));
+
+    const senderSig = await townStoryLib.signTransaction(txb, senderSigner);
+
+    const feeSig = await townStoryLib.signTransaction(txb, feeSigner);
+
+    const result = await townStoryLib.executeTransactionBlock(txb, [senderSig, feeSig]);
+
+    console.log(result);
+
+    console.log("Thief Address: ", (await townStoryLib.getThiefObject(result.digest)))
+}
+
+async function addMetadataTx(senderSigner: RawSigner, feeSigner: RawSigner, versionConfig: string,
+                      adminCap: string, thiefIndexConfig: string, indexes: bigint[], imageUrls: string[], metadataUrls: string[]) {
+    const txb: TransactionBlock = await townStoryLib.addMetadataTransaction((await senderSigner.getAddress()), versionConfig, adminCap, thiefIndexConfig, indexes, imageUrls, metadataUrls,
+        (await feeSigner.getAddress()));
+
+    const senderSig = await townStoryLib.signTransaction(txb, senderSigner);
+
+    const feeSig = await townStoryLib.signTransaction(txb, feeSigner);
+
+    const result = await townStoryLib.executeTransactionBlock(txb, [senderSig, feeSig]);
+
+    console.log(result);
+
+    console.log("Thief Address: ", (await townStoryLib.getThiefObject(result.digest)))
+}
+
+async function updateMetadataTx(senderSigner: RawSigner, feeSigner: RawSigner, versionConfig: string,
+                             adminCap: string, thiefIndexConfig: string, indexes: bigint[], imageUrls: string[], metadataUrls: string[]) {
+    const txb: TransactionBlock = await townStoryLib.updateMetadataTransaction((await senderSigner.getAddress()), versionConfig, adminCap, thiefIndexConfig, indexes, imageUrls, metadataUrls,
         (await feeSigner.getAddress()));
 
     const senderSig = await townStoryLib.signTransaction(txb, senderSigner);
