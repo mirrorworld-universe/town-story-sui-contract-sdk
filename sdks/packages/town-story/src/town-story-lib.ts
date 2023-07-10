@@ -276,6 +276,72 @@ export class TownStoryLib {
     return txb;
   }
 
+  async addMetadataTransaction(
+    adminCapOwnerAddress: string,
+    versionConfigObjectAddress: string,
+    adminCapObjectAddress: string,
+    thiefIndexConfigObjectAddress: string,
+    indexes: bigint[],
+    imageUrls: string[],
+    metadataUrls: string[],
+    feePayer: string | undefined = undefined,
+    gasBudget: bigint | undefined = undefined,
+    gasCoinObjectAddress: string | undefined = undefined
+  ): Promise<TransactionBlock> {
+    const txb = new TransactionBlock();
+    txb.add(
+      Transactions.MoveCall({
+        target: `${this.publishedAtAddress}::sneaky_thief::add_metadata`,
+        arguments: [
+          txb.pure(versionConfigObjectAddress),
+          txb.pure(adminCapObjectAddress),
+          txb.pure(thiefIndexConfigObjectAddress),
+          txb.pure(indexes),
+          txb.pure(imageUrls),
+          txb.pure(metadataUrls),
+        ],
+        typeArguments: [],
+      })
+    );
+
+    await this.addFeePayerAndGasBudgetInTransaction(txb, adminCapOwnerAddress, feePayer, gasBudget, gasCoinObjectAddress);
+
+    return txb;
+  }
+
+  async updateMetadataTransaction(
+    adminCapOwnerAddress: string,
+    versionConfigObjectAddress: string,
+    adminCapObjectAddress: string,
+    thiefIndexConfigObjectAddress: string,
+    indexes: bigint[],
+    imageUrls: string[],
+    metadataUrls: string[],
+    feePayer: string | undefined = undefined,
+    gasBudget: bigint | undefined = undefined,
+    gasCoinObjectAddress: string | undefined = undefined
+  ): Promise<TransactionBlock> {
+    const txb = new TransactionBlock();
+    txb.add(
+      Transactions.MoveCall({
+        target: `${this.publishedAtAddress}::sneaky_thief::update_metadata`,
+        arguments: [
+          txb.pure(versionConfigObjectAddress),
+          txb.pure(adminCapObjectAddress),
+          txb.pure(thiefIndexConfigObjectAddress),
+          txb.pure(indexes),
+          txb.pure(imageUrls),
+          txb.pure(metadataUrls),
+        ],
+        typeArguments: [],
+      })
+    );
+
+    await this.addFeePayerAndGasBudgetInTransaction(txb, adminCapOwnerAddress, feePayer, gasBudget, gasCoinObjectAddress);
+
+    return txb;
+  }
+
   async wihetlistMintTransaction(
     userAddress: string,
     versionConfigObjectAddress: string,
