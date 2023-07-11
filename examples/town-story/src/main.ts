@@ -5,12 +5,12 @@ import {
     RawSigner,
     SuiTransactionBlockResponse,
     TransactionBlock,
-    SuiEvent
+    SuiEvent, localnetConnection
 } from "@mysten/sui.js";
 import {Buffer} from "buffer";
 import {TownStoryLib} from "@mirrorworld/sui.townstory";
 
-const provider: JsonRpcProvider = new JsonRpcProvider(testnetConnection);
+const provider: JsonRpcProvider = new JsonRpcProvider(localnetConnection);
 const OwnerKey: string = "";
 const BuyerKey: string = "";
 const SellerKey: string = "";
@@ -35,22 +35,20 @@ const SellerSigner = new RawSigner(SellerKeypair, provider);
 const RoyaltySigner = new RawSigner(RoyaltyKeypair, provider);
 const FeePayerSigner = new RawSigner(FeePayerKeypair, provider);
 
-const PublishAtAddress: string = "0x0f8a2de3ecaa3d42dc31b3e288637e16b573fad83c43e0cc540c0835eba0779c";
-const PackageAddress: string = "0x0f8a2de3ecaa3d42dc31b3e288637e16b573fad83c43e0cc540c0835eba0779c";
+const PublishAtAddress: string = "0x0eacee563e2c3fa533dc60e39f8e840f23aae0d8156dde2b0c7a5850b8996913";
+const PackageAddress: string = "0x0eacee563e2c3fa533dc60e39f8e840f23aae0d8156dde2b0c7a5850b8996913";
 
-const PublisherAddress: string = "0x4775a0ee618b0ad287b279a3fdb357d5347d44798e982b5861ed00b5d80ecef8";
+const AdminCapAddress: string = "0x64df22777ccc16f7c725e060c391e0dd4e65b39d02618fc7ff3563034ef78eb2";
 
-const AdminCapAddress: string = "0x106830f67d6e3ff8adad409d5f7932cf86ab5e525acab762ce95f511600d3d1c";
+const ThiefIndexConfigAddress: string = "0x6a566a61d023084dca375aba3332d771f8f0c915a69337482efcb3fdbc1a9b96";
 
-const ThiefIndexConfigAddress: string = "0x485ccb79379da03ae1d776cf139b781e31cd648574933cf80122b48762034cc2";
+const UserConfigAddress: string = "0xc1a462db73a66c7c1befb4a1ee38259442cdbcc216cee2b5b9ad967ca538c558";
 
-const UserConfigAddress: string = "0x1aaa1fef2ef4b5c1ff54143b8f53e7e8e11ce7cc6d41e9ea678ca1e2d3720d9c";
+const MintConfigAddress: string = "0xf990fb8b7a26c002067df490f161030e3a0989cb3dbb334f23e0c267fb2a66db";
 
-const MintConfigAddress: string = "0x7877e6c4b32e9b71e3b20f141c039af14d94ac49bc21fc3348c677359bf756a1";
+const MintCapAddress: string = "0xf059e2f1af3ac524ca641256511cb41d8a0f6b91b12b349997ebbc0f0980ac16";
 
-const MintCapAddress: string = "0xf811952e3950740ae6add118499920b3586300cb9eb2c55551b5ea9ecd6cba11";
-
-const VersionConfigAddress: string = "0x3ba080fa66a88d5d133d66fe871a58c6d7d44eb45c384c26b9d63251f8e85f24";
+const VersionConfigAddress: string = "0x39c00bb87628d2bcc309f64277c7713abdae4875dd8207ba37a142ddd1132e93";
 
 
 const townStoryLib: TownStoryLib = new TownStoryLib(PublishAtAddress, PackageAddress, provider);
@@ -85,20 +83,71 @@ const townStoryLib: TownStoryLib = new TownStoryLib(PublishAtAddress, PackageAdd
     // Mint Methods
 
     // await wihetlistMintTx(SellerSigner, FeePayerSigner, VersionConfigAddress, MintConfigAddress, ThiefIndexConfigAddress, UserConfigAddress, MintCapAddress,
-    //     "0x522dc8c46d42c35da275b2f3f0690312286bdb2f51445be9f4831a40c8d78b91");
+    //     "0x60f6761fafc9ce7f5c3d8257af533090889dc1595990bb02b671d70d389a0f74");
 
     // await mintTx(BuyerSigner, FeePayerSigner, VersionConfigAddress, MintConfigAddress, ThiefIndexConfigAddress, UserConfigAddress, MintCapAddress,
-    //     "0x5d15fedde05d5f71931d0a1326d5580d81fb77b1f9555cf182beaa99aaeb5cd4");
+    //     "0x6d55423f66556b2b0d8801c8b116ee7788939364b2e118248104d1d8442a216c");
     //
     // await adminMintTx(OwnerSigner, FeePayerSigner, VersionConfigAddress, MintConfigAddress, ThiefIndexConfigAddress, UserConfigAddress, MintCapAddress,
     //     AdminCapAddress, RoyaltyKeypair.getPublicKey().toSuiAddress());
 
     // Metadata
 
-    // const imageUrlBase: string = "https://suiexplorer.com/image";
-    // const metadataUrlBase: string = "https://suiexplorer.com/image";
+    // const imageUrlBase: string = "https://suiexplorer.com/image/new";
+    // const metadataUrlBase: string = "https://suiexplorer.com/image/metadata/new";
     //
-    // const indexStart
+    // let indexStart: number = 1;
+    // let indexEnd: number = 100;
+    //
+    // let indexes: number[] = [];
+    // let imageUrls: string[] = [];
+    // let metadataUrls: string[] = [];
+    //
+    // for (let i = indexStart; i <= indexEnd ; i++) {
+    //     indexes.push(i);
+    //     imageUrls.push(imageUrlBase + "/" + i);
+    //     metadataUrls.push(metadataUrlBase + "/" + i);
+    // }
+    //
+    // console.log(indexes);
+    // console.log(imageUrls);
+    // console.log(metadataUrls);
+
+    // await addMetadataTx(OwnerSigner, FeePayerSigner, VersionConfigAddress, AdminCapAddress, ThiefIndexConfigAddress, indexes, imageUrls, metadataUrls);
+    // await updateMetadataTx(OwnerSigner, FeePayerSigner, VersionConfigAddress, AdminCapAddress, ThiefIndexConfigAddress, indexes, imageUrls, metadataUrls);
+
+    // let indexStart: number = 201;
+    // let indexEnd: number = 300;
+    //
+    // for (let j = 0; j < 99; j++) {
+    //     const imageUrlBase: string = "https://suiexplorer.com/image";
+    //     const metadataUrlBase: string = "https://suiexplorer.com/image";
+    //
+    //     let indexes: number[] = [];
+    //     let imageUrls: string[] = [];
+    //     let metadataUrls: string[] = [];
+    //
+    //     for (let i = indexStart; i <= indexEnd ; i++) {
+    //         indexes.push(i);
+    //         imageUrls.push(imageUrlBase + "/" + i);
+    //         metadataUrls.push(metadataUrlBase + "/" + i);
+    //     }
+    //
+    //     // console.log(indexes);
+    //     // console.log(imageUrls);
+    //     // console.log(metadataUrls);
+    //
+    //     await addMetadataTx(OwnerSigner, FeePayerSigner, VersionConfigAddress, AdminCapAddress, ThiefIndexConfigAddress, indexes, imageUrls, metadataUrls);
+    //
+    //     indexStart = indexStart + 100;
+    //     indexEnd = indexEnd + 100;
+    //
+    //     console.log(indexStart)
+    //     console.log(indexEnd)
+    //
+    //     await delay(5000);
+    //     console.log("tx index: ", j)
+    // }
 
 })();
 
@@ -326,7 +375,7 @@ async function mintTx(senderSigner: RawSigner, feeSigner: RawSigner, versionConf
 }
 
 async function addMetadataTx(senderSigner: RawSigner, feeSigner: RawSigner, versionConfig: string,
-                      adminCap: string, thiefIndexConfig: string, indexes: bigint[], imageUrls: string[], metadataUrls: string[]) {
+                      adminCap: string, thiefIndexConfig: string, indexes: number[], imageUrls: string[], metadataUrls: string[]) {
     const txb: TransactionBlock = await townStoryLib.addMetadataTransaction((await senderSigner.getAddress()), versionConfig, adminCap, thiefIndexConfig, indexes, imageUrls, metadataUrls,
         (await feeSigner.getAddress()));
 
@@ -337,12 +386,10 @@ async function addMetadataTx(senderSigner: RawSigner, feeSigner: RawSigner, vers
     const result = await townStoryLib.executeTransactionBlock(txb, [senderSig, feeSig]);
 
     console.log(result);
-
-    console.log("Thief Address: ", (await townStoryLib.getThiefObject(result.digest)))
 }
 
 async function updateMetadataTx(senderSigner: RawSigner, feeSigner: RawSigner, versionConfig: string,
-                             adminCap: string, thiefIndexConfig: string, indexes: bigint[], imageUrls: string[], metadataUrls: string[]) {
+                             adminCap: string, thiefIndexConfig: string, indexes: number[], imageUrls: string[], metadataUrls: string[]) {
     const txb: TransactionBlock = await townStoryLib.updateMetadataTransaction((await senderSigner.getAddress()), versionConfig, adminCap, thiefIndexConfig, indexes, imageUrls, metadataUrls,
         (await feeSigner.getAddress()));
 
@@ -353,8 +400,6 @@ async function updateMetadataTx(senderSigner: RawSigner, feeSigner: RawSigner, v
     const result = await townStoryLib.executeTransactionBlock(txb, [senderSig, feeSig]);
 
     console.log(result);
-
-    console.log("Thief Address: ", (await townStoryLib.getThiefObject(result.digest)))
 }
 
 function delay(ms: number) {
